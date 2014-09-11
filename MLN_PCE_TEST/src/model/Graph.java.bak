@@ -1,0 +1,593 @@
+﻿package com.etri.pce.PCM.model;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.Vector;
+
+import com.etri.pce.PCM.model.abstracts.BaseGraph;
+import com.etri.pce.PCM.model.abstracts.BaseVertex;
+import com.etri.pce.SMM.SystemManager;
+
+//import com.mysql.jdbc.ResultSet;
+
+
+public class Graph implements BaseGraph {
+	public final static double DISCONNECTED = Double.MAX_VALUE;
+
+	// index of fan-outs of one vertex
+	// protected Map<Integer, Set<BaseVertex>> _fanout_vertices_index = new
+	// HashMap<Integer, Set<BaseVertex>>();
+//	protected Map<Long, Set<BaseVertex>> _fanout_vertices_index = new HashMap<Long, Set<BaseVertex>>();
+	protected Map<Long, Vector<BaseVertex>> _fanout_vertices_index = new HashMap<Long, Vector<BaseVertex>>();
+
+	// index for fan-ins of one vertex
+	// protected Map<Integer, Set<BaseVertex>> _fanin_vertices_index = new
+	// HashMap<Integer, Set<BaseVertex>>();
+//	protected Map<Long, Set<BaseVertex>> _fanin_vertices_index = new HashMap<Long, Set<BaseVertex>>();
+	protected Map<Long, Vector<BaseVertex>> _fanin_vertices_index = new HashMap<Long, Vector<BaseVertex>>();
+
+	// index for edge weights in the graph
+	// protected Map<Pair<Integer, Integer>, Double> _vertex_pair_weight_index =
+	// new HashMap<Pair<Integer,Integer>, Double>();
+	protected Map<Pair<Long, Long>, Double> _vertex_pair_weight_index = new HashMap<Pair<Long, Long>, Double>();
+
+	// Pair 내부에 인자로 pair 두 개를 가지는 edge map을 만든다.
+	public Map<Pair, Double> _vertex_pair_weight_if_index = new HashMap<Pair, Double>();
+	
+	// index for vertices in the graph
+	// map 클래스를 _id_vertex_index 이름으로 만드는데 그 형태는 new HashMap 형태 인데
+	// 키값의 object 가 Integer 거기에 저장되는 스트럭쳐 타입이 BaseVertex
+	// protected Map<Integer, BaseVertex> _id_vertex_index = new
+	// HashMap<Integer, BaseVertex>();
+	protected Map<Long, BaseVertex> _id_vertex_index = new HashMap<Long, BaseVertex>();
+
+	// list of vertices in the graph
+	protected List<BaseVertex> _vertex_list = new Vector<BaseVertex>();
+
+	// the number of vertices in the graph
+	protected int _vertex_num = 0;
+
+	// the number of arcs in the graph
+	protected int _edge_num = 0;
+
+	// ischoi
+	Vector<String> vecNeList;
+
+	/**
+	 * Constructor 1
+	 * 
+	 * @param data_file_name
+	 */
+	public Graph(final String data_file_name) {
+		// ischoi : 임시로 NE의 아이피 주소값들을 Vector에 담아둔다. 추후 없애야 하는 부분
+		// 아.. 이걸 크기를 지정하기 위해서 사용하는가?
+		vecNeList = new Vector<String>();
+		vecNeList.add("10.10.10.1"); // System.out.println("10.10.10.1 = " +
+										// WatchUtil.getAddrLong("10.10.10.1"));
+		vecNeList.add("10.10.10.2"); // System.out.println("10.10.10.2 = " +
+										// WatchUtil.getAddrLong("10.10.10.2"));
+		vecNeList.add("10.10.10.3"); // System.out.println("10.10.10.3 = " +
+										// WatchUtil.getAddrLong("10.10.10.3"));
+		vecNeList.add("10.10.10.4"); // System.out.println("10.10.10.4 = " +
+										// WatchUtil.getAddrLong("10.10.10.4"));
+		vecNeList.add("10.10.10.5"); // System.out.println("10.10.10.5 = " +
+										// WatchUtil.getAddrLong("10.10.10.5"));
+
+		// import_from_file(data_file_name);
+	}
+
+	// ischoi
+//	public Graph(ResultSet rset) 
+	public Graph(Vector rset_vec) // 최초 읽어온 TeLink Table 의 row들
+	{
+		vecNeList = new Vector<String>();
+
+		/**
+		 * 모든 row를 읽어서 노드의 중복을 제거하고, 전체 노드를 vecNeList에 담는 부분
+		 */
+		String tmpLocal = null;
+		String tmpRemote = null;
+
+		// ischoi 2010-06-07
+		// Routing Listener에서 수집해놓은 ted를 가져왔으므로, 아래 for 루프의 내용과는 컬럼의 배열이 달라졌기 때문에
+		// 파싱 룰을 바꾸어주어야 한다.
+		if(SystemManager.is_RL)
+		{
+			for(int i=0; i<rset_vec.size(); i++)
+			{
+				String temp_row = (String)rset_vec.elementAt(i);
+				StringTokenizer st = new StringTokenizer(temp_row, "/");
+				
+				tmpLocal = st.nextToken();
+				tmpLocal = WatchUtil.convertAddr(Long.parseLong(tmpLocal));
+				//st.nextToken();
+				//st.nextToken();
+				tmpRemote = st.nextToken();
+				tmpRemote = WatchUtil.convertAddr(Long.parseLong(tmpRemote));
+
+				if((!tmpLocal.equals("0.0.0.0") && !tmpRemote.equals("0.0.0.0")) || (!tmpLocal.equals("0") && !tmpRemote.equals("0")))
+				{
+				if (vecNeList.size() == 0 && !tmpLocal.equals(tmpRemote)) 
+				{
+					vecNeList.add(tmpLocal);
+					vecNeList.add(tmpRemote);
+				} 
+				if (!vecNeList.contains(tmpLocal)) 
+				{
+					vecNeList.add(tmpLocal);
+				} 
+				if (!vecNeList.contains(tmpRemote)) 
+				{
+					vecNeList.add(tmpRemote);
+				}
+			}
+				else
+				{
+					SystemManager.otllogger.out.setAdditivity(true);
+					SystemManager.otllogger.out.debug("(RL)TeLink Table의 특정 Row를 구성하는 링크 정보 중에  Local Node 및 Remote Node의 IP 정보가 0.0.0.0 또는 0 값이 들어가 있어서 vecNeList에 넣지 않는다.");
+					SystemManager.otllogger.out.setAdditivity(false);
+				}
+			}
+		}
+		// RL 모드가 아니면...  (단, OPS와 PPS의 DB 구조는 동일하다)
+		else
+		{			
+			// 벡터에서 값을 꺼내와서 토크나이징을 통해 노드 정보를 추출하는 부분
+			for(int i=0; i<rset_vec.size(); i++)
+			{
+				String temp_row = (String)rset_vec.elementAt(i);
+				StringTokenizer st = new StringTokenizer(temp_row, "/");
+				tmpLocal = st.nextToken(); // 첫번째 컬럼
+				st.nextToken();
+				tmpRemote = st.nextToken(); // 세번째 컬럼
+
+				if((!tmpLocal.equals("0.0.0.0") && !tmpRemote.equals("0.0.0.0")) || (!tmpLocal.equals("0") && !tmpRemote.equals("0")))
+				{
+				if (vecNeList.size() == 0 && !tmpLocal.equals(tmpRemote)) 
+				{
+					vecNeList.add(tmpLocal);
+					vecNeList.add(tmpRemote);
+				} 
+				if (!vecNeList.contains(tmpLocal)) 
+				{
+					vecNeList.add(tmpLocal);
+				} 
+				if (!vecNeList.contains(tmpRemote)) 
+				{
+					vecNeList.add(tmpRemote);
+				}
+			}
+				else
+				{
+					SystemManager.otllogger.out.setAdditivity(true);
+					SystemManager.otllogger.out.debug("TeLink Table의 특정 Row를 구성하는 링크 정보 중에  Local Node 및 Remote Node의 IP 정보가 0.0.0.0 또는 0 값이 들어가 있어서 vecNeList에 넣지 않는다.");
+					SystemManager.otllogger.out.setAdditivity(false);
+				}
+			}
+		}
+		
+		import_from_DB(rset_vec);
+	}
+
+	/**
+	 * Constructor 2
+	 * 
+	 * @param graph
+	 */
+	public Graph(final Graph graph_) {
+		_vertex_num = graph_._vertex_num;
+		_edge_num = graph_._edge_num;
+		_vertex_list.addAll(graph_._vertex_list);
+		_id_vertex_index.putAll(graph_._id_vertex_index);
+		_fanin_vertices_index.putAll(graph_._fanin_vertices_index);
+		_fanout_vertices_index.putAll(graph_._fanout_vertices_index);
+		_vertex_pair_weight_index.putAll(graph_._vertex_pair_weight_index);
+	}
+
+	/**
+	 * Default constructor
+	 */
+	public Graph() {
+	};
+
+	/**
+	 * Clear members of the graph.
+	 */
+	public void clear() {
+		// 2010-08-26 ischoi: 추가
+		Vertex.reset();
+		// end
+		
+		_vertex_num = 0;
+		_edge_num = 0;
+		_vertex_list.clear();
+		_id_vertex_index.clear();
+		_fanin_vertices_index.clear();
+		_fanout_vertices_index.clear();
+		_vertex_pair_weight_index.clear();
+	}
+
+	// ischoi
+//	public void import_from_DB(java.sql.ResultSet rset) {
+	public void import_from_DB(Vector rset_vec)
+	{
+		String line; // String that holds current file line
+
+		// // 2. Read first line
+		// line = bufRead.readLine();
+
+		_vertex_num = vecNeList.size();
+
+		for (int i = 0; i < _vertex_num; ++i) 
+		{
+			// ischoi : 새로운 vertex를 생성할때, 아래와 같은 방법으로 하면 서로 아구가 안맞는다.
+			// ischoi : 따라서, vertex를 생성할때, vertex의 id 값도 ip주소 형태로 맞춰줘야 한다.
+			// ischoi : 방법은 DB의 NE 테이블로부터 모든 NE에 대한 ip 정보를 가져와서 순차적으로 사용하는 수밖에
+			// 없다.
+			// 일단 임시 방편으로 vector에 모든 NE의 IP 주소를 String 형태로 넣어두고 테스트를 하기로 한다. 이는
+			// 추후에 DB에서 가져오는 값으로 변경해야 함.
+			BaseVertex vertex = new Vertex();
+			
+			String tmp_node = (String)vecNeList.elementAt(i);
+			long tmp_node_long = WatchUtil.getAddrLong(tmp_node);
+
+			vertex.set_id(tmp_node_long);
+			
+			_vertex_list.add(vertex);
+
+			_id_vertex_index.put(vertex.get_id(), vertex);
+		}
+		
+		// ischoi 2010-06-08
+		if(SystemManager.is_RL)
+		{
+			String localNode = "";
+			String remoteNode = "";
+			String localIf = "";
+			String remoteIf = "";
+			String metric = "";
+			
+/*
+			 		temp_row = 	rset.getString("adv_rtr") + " " + rset.getString("link_local_id") + " " +
+						rset.getString("link_id_value") + " " + rset.getString("link_remote_id") + " " +
+						rset.getString("max_bw_value") + " " + rset.getString("max_rsv_bw_value") 	+ " " +
+						rset.getString("te_metric_value")	+ " 1" // link_state 
+*/
+			
+			for(int i=0; i<rset_vec.size(); i++)
+			{
+				line = (String)rset_vec.elementAt(i);
+				
+				StringTokenizer st = new StringTokenizer(line, "/");
+				
+				localNode = st.nextToken();
+				remoteNode = st.nextToken();
+				localIf = st.nextToken();
+				remoteNode = st.nextToken();
+				remoteIf = st.nextToken();				
+				st.nextToken();
+				st.nextToken();
+				metric = st.nextToken();
+				
+				line = localNode + ":" + localIf + ":" + remoteNode + ":" + remoteIf + ":" + metric;
+				
+				// 2.2.2 find a new edge and put it in the graph
+				//String[] str_list = line.trim().split(":");
+
+				// ischoi : 이 부분에 IP 주소형식의 string을 int또는 long 형태로 바꾸어주는 부분이
+				// 들어가줘야 함.
+				// 이 내용은 최초 그래프를 구성할때 vertex의 id값을 생성하는 부분과도 맞춰줘야 한다. 그쪽에서는 아이피
+				// 주소를 사용하지 않는데 어찌해야 할까?
+				// vertex를 생성할때 vertex 클래스 내부적으로 0부터 자동으로 id를 generation하도록
+				// 되어있다. 이 부분을 수정해야 할까?
+
+				// ischoi 2010-06-08
+				long start_vertex_id = WatchUtil.getAddrLong(localNode);
+				int start_vertex_ifIndex = Integer.parseInt(localIf);
+				long end_vertex_id = WatchUtil.getAddrLong(remoteNode);
+				int end_vertex_ifIndex = Integer.parseInt(remoteIf);
+				double weight = Double.parseDouble(metric);
+					
+				if(start_vertex_id == 0 || end_vertex_id == 0)
+				{
+					SystemManager.otllogger.out.setAdditivity(true);
+					SystemManager.otllogger.out.debug("Node ID 즉, IP 주소가  0.0.0.0 또는 0 이므로 해당 링크는 Graph에 링크로 등록하지 않는다.");
+					SystemManager.otllogger.out.debug(WatchUtil.convertAddr(start_vertex_id) + ":" + start_vertex_ifIndex + " <--> " + WatchUtil.convertAddr(end_vertex_id) + ":" + end_vertex_ifIndex + ":" + weight);
+					SystemManager.otllogger.out.setAdditivity(true);
+				}
+				else
+				{
+					// ischoi 여기에서 분명 IfIndex 값을 넘겨야 하는뎅... 흠..
+					add_edge(start_vertex_id, end_vertex_id, weight, start_vertex_ifIndex, end_vertex_ifIndex);
+				}		
+			} // end for
+		} // is_RL end
+		
+		else
+		{			
+			for(int i=0; i<rset_vec.size(); i++)
+			{
+				line = (String)rset_vec.elementAt(i);
+				
+				StringTokenizer st = new StringTokenizer(line, "/");
+				
+				// 2010-12-29 ischoi TeLink 테이블의 index가 PPS의 경우 v2가 되면서 metric의 위치가 기존 10번에서 11번으로 변경되어 이에 맞게 OPS/PPS를 구분짓는 부분을 추가함
+				if(SystemManager.is_ops)
+				{					
+					line = 	st.nextToken() + ":" + st.nextToken() + ":" + st.nextToken() + ":" + st.nextToken() + ":";
+					st.nextToken();
+					st.nextToken();
+					st.nextToken();
+					st.nextToken();
+					st.nextToken();
+					line = line + st.nextToken();
+				}
+				else
+				{
+				line = 	st.nextToken() + ":" + st.nextToken() + ":" + st.nextToken() + ":" + st.nextToken() + ":";
+				st.nextToken();
+				st.nextToken();
+				st.nextToken();
+				st.nextToken();
+				st.nextToken();
+				st.nextToken();
+				line = line + st.nextToken();
+				}
+
+				
+				// 2.2.2 find a new edge and put it in the graph
+				String[] str_list = line.trim().split(":");
+
+				// ischoi : 이 부분에 IP 주소형식의 string을 int또는 long 형태로 바꾸어주는 부분이
+				// 들어가줘야 함.
+				// 이 내용은 최초 그래프를 구성할때 vertex의 id값을 생성하는 부분과도 맞춰줘야 한다. 그쪽에서는 아이피
+				// 주소를 사용하지 않는데 어찌해야 할까?
+				// vertex를 생성할때 vertex 클래스 내부적으로 0부터 자동으로 id를 generation하도록
+				// 되어있다. 이 부분을 수정해야 할까?
+				
+				// Debug 모드로 변경해야 함
+//				System.out.println("Graph의 import_from_DB(ResultSet rset)에서 하나의 row를 읽었을때의 값 : ");
+//				System.out.println(str_list[0] + "  " + str_list[1] + "  " + str_list[2] + " " + str_list[3] + " " + str_list[4]);
+
+				long start_vertex_id = WatchUtil.getAddrLong(str_list[0]);
+				int start_vertex_ifIndex = Integer.parseInt(str_list[1]);
+				long end_vertex_id = WatchUtil.getAddrLong(str_list[2]);
+				int end_vertex_ifIndex = Integer.parseInt(str_list[3]);
+				double weight = Double.parseDouble(str_list[4]);		
+				
+				if(start_vertex_id == 0 || end_vertex_id == 0)
+				{
+					SystemManager.otllogger.out.setAdditivity(true);
+					SystemManager.otllogger.out.debug("Node ID 즉, IP 주소가  0.0.0.0 또는 0 이므로 해당 링크는 Graph에 링크로 등록하지 않는다.");
+					SystemManager.otllogger.out.debug(WatchUtil.convertAddr(start_vertex_id) + ":" + start_vertex_ifIndex + " <--> " + WatchUtil.convertAddr(end_vertex_id) + ":" + end_vertex_ifIndex + ":" + weight);
+					SystemManager.otllogger.out.setAdditivity(true);
+				}
+				else
+				{					
+				// ischoi 여기에서 분명 IfIndex 값을 넘겨야 하는뎅... 흠..
+				add_edge(start_vertex_id, end_vertex_id, weight, start_vertex_ifIndex, end_vertex_ifIndex);
+			}
+		}
+		}
+
+	}
+
+	/**
+	 * There is a requirement for the input graph. The ids of vertices must be
+	 * consecutive.
+	 * 
+	 * @param data_file_name
+	 */
+
+	/**
+	 * Note that this may not be used externally, because some other members in
+	 * the class should be updated at the same time.
+	 * 
+	 * @param start_vertex_id
+	 * @param end_vertex_id
+	 * @param weight
+	 */
+	// protected void add_edge(int start_vertex_id, int end_vertex_id, double
+	// weight)
+	// edge의 시작과 끝 정보를 가지고 edge 정보를 구성하는 함수
+	protected void add_edge(long start_vertex_id, long end_vertex_id, double weight, int start_vertex_ifIndex, int end_vertex_ifIndex) {
+		// actually, we should make sure all vertices ids must be correct.
+		// 최초 graph 생성시 만들어두었던 vertexid와 basevertex의 해쉬테이블 상에 존재하는 노드인지 아닌지를
+		// 체크하는 부분
+
+		// 관리 노드인지 아닌지를 판단하는 부분
+		if (!_id_vertex_index.containsKey(start_vertex_id) || !_id_vertex_index.containsKey(end_vertex_id) || start_vertex_id == end_vertex_id) 
+		{
+			throw new IllegalArgumentException("The edge from " + start_vertex_id + " to " + end_vertex_id + " does not exist in the graph.");
+		}
+
+		// update the adjacent-list of the graph
+		// 매번 새로 생성을 하는구나?
+//		Set<BaseVertex> fanout_vertex_set = new HashSet<BaseVertex>();
+		Vector<BaseVertex> fanout_vertex_set = new Vector<BaseVertex>();
+
+		// 처음에는 안가지고 있으니까 패스하지만, 두번째는 내부로 들어간다.
+		if (_fanout_vertices_index.containsKey(start_vertex_id)) {
+			// 여기엔 endVertexes값이 들어간다.
+			fanout_vertex_set = _fanout_vertices_index.get(start_vertex_id);
+		}
+		
+		// ischoi 자신의 로컬 및 리모트 인터페이스 인덱스 값을 여기에 삽입해 두었다.
+		Vertex tmpVertex = (Vertex) _id_vertex_index.get(end_vertex_id);
+		tmpVertex.set_ifIndex(end_vertex_ifIndex);
+		tmpVertex.set_remote_ifIndex(start_vertex_ifIndex);
+
+		// fanout_vertex_set.add(_id_vertex_index.get(end_vertex_id));
+		// ischoi end_vertex에 ifIndex 값을 삽입하였음. 그리고 remoteIfIndex도 함께 넣어주었음
+		fanout_vertex_set.add(tmpVertex);
+
+		_fanout_vertices_index.put(start_vertex_id, fanout_vertex_set);
+
+		// 매번 새로 생성을 하는구나?
+//		Set<BaseVertex> fanin_vertex_set = new HashSet<BaseVertex>();
+		Vector<BaseVertex> fanin_vertex_set = new Vector<BaseVertex>();
+		
+		if (_fanin_vertices_index.containsKey(end_vertex_id)) {
+			fanin_vertex_set = _fanin_vertices_index.get(end_vertex_id);
+		}
+
+		// ischoi 자신의 로컬 및 리모트 인터페이스 인덱스 값을 여기에 삽입해 두었다.
+		Vertex tmpPreviousVertex = (Vertex) _id_vertex_index.get(start_vertex_id);
+		tmpPreviousVertex.set_ifIndex(start_vertex_ifIndex);
+		tmpPreviousVertex.set_remote_ifIndex(end_vertex_ifIndex);
+
+		// fanin_vertex_set에는 start_vertex 가 들어가게 된다.
+		// fanin_vertex_set.add(_id_vertex_index.get(start_vertex_id));
+		// ischoi end_vertex에 ifIndex 값을 삽입하였음. 그리고 remoteIfIndex도 함께 넣어주었음
+		fanin_vertex_set.add(tmpPreviousVertex);
+		_fanin_vertices_index.put(end_vertex_id, fanin_vertex_set);
+
+		// store the new edge
+	 // _vertex_pair_weight_index.put(new Pair<Integer, Integer>(start_vertex_id, end_vertex_id), weight);
+		_vertex_pair_weight_index.put(new Pair<Long, Long>(start_vertex_id, end_vertex_id), weight);
+
+		// Pair<pair, double>
+		// 내부 pair은 node ifindex, node ifindex를 값으로 가짐
+		// 이 녀석은 두 노드간 다수의 링크가 있는 경우를 모두 포함하므로, 위의 pair보다 개수가 많거나 같다.
+		// 좌측 노드의 아웃 인터페이스 아이디
+		Pair<Long, Integer> start_pair = new Pair<Long, Integer>(start_vertex_id, start_vertex_ifIndex);
+		// 우측 노드의 인풋 인터페이스 아이디
+		Pair<Long, Integer> end_pair = new Pair<Long, Integer>(end_vertex_id, end_vertex_ifIndex);
+		Pair<Pair, Pair> pair = new Pair<Pair, Pair>(start_pair, end_pair);
+		_vertex_pair_weight_if_index.put(pair, weight);
+
+		++_edge_num;
+	}
+
+	/**
+	 * Store the graph information into a file.
+	 * 
+	 * @param file_name
+	 */
+	public void export_to_file(final String file_name) {
+		// 1. prepare the text to export
+		StringBuffer sb = new StringBuffer();
+		sb.append(_vertex_num + "\n\n");
+		// for(Pair<Integer, Integer> cur_edge_pair :
+		// _vertex_pair_weight_index.keySet())
+		for (Pair<Long, Long> cur_edge_pair : _vertex_pair_weight_index.keySet()) {
+			// int starting_pt_id = cur_edge_pair.first();
+			// int ending_pt_id = cur_edge_pair.second();
+			long starting_pt_id = cur_edge_pair.first();
+			long ending_pt_id = cur_edge_pair.second();
+			double weight = _vertex_pair_weight_index.get(cur_edge_pair);
+			sb.append(starting_pt_id + "	" + ending_pt_id + "	" + weight + "\n");
+		}
+		// 2. open the file and put the data into the file.
+		Writer output = null;
+		try {
+			// use buffering
+			// FileWriter always assumes default encoding is OK!
+			output = new BufferedWriter(new FileWriter(new File(file_name)));
+			output.write(sb.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			// flush and close both "output" and its underlying FileWriter
+			try {
+				if (output != null)
+					output.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * edu.asu.emit.qyan.alg.model.abstracts.BaseGraph#get_adjacent_vertices
+	 * (edu.asu.emit.qyan.alg.model.abstracts.BaseVertex) 인자로 전달받은 노드와 인접하고 있는
+	 * 이웃노드에 대한 set을 리턴하는 메소드
+	 */
+//	public Set<BaseVertex> get_adjacent_vertices(BaseVertex vertex) {
+//		// HashMap.get이므로 value는 한 개만 리턴해 줄것인뎅.. 흠.. 흠..
+//		return _fanout_vertices_index.containsKey(vertex.get_id()) ? _fanout_vertices_index.get(vertex.get_id()): new HashSet<BaseVertex>();
+//	}
+	public Vector<BaseVertex> get_adjacent_vertices(BaseVertex vertex) {
+		// HashMap.get이므로 value는 한 개만 리턴해 줄것인뎅.. 흠.. 흠..
+		return _fanout_vertices_index.containsKey(vertex.get_id()) ? _fanout_vertices_index.get(vertex.get_id()): new Vector<BaseVertex>();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * edu.asu.emit.qyan.alg.model.abstracts.BaseGraph#get_precedent_vertices
+	 * (edu.asu.emit.qyan.alg.model.abstracts.BaseVertex)
+	 */
+//	public Set<BaseVertex> get_precedent_vertices(BaseVertex vertex) {
+//		return _fanin_vertices_index.containsKey(vertex.get_id()) ? _fanin_vertices_index.get(vertex.get_id()): new HashSet<BaseVertex>();
+//	}
+	public Vector<BaseVertex> get_precedent_vertices(BaseVertex vertex) {
+		return _fanin_vertices_index.containsKey(vertex.get_id()) ? _fanin_vertices_index.get(vertex.get_id()): new Vector<BaseVertex>();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * edu.asu.emit.qyan.alg.model.abstracts.BaseGraph#get_edge_weight(edu.asu
+	 * .emit.qyan.alg.model.abstracts.BaseVertex,
+	 * edu.asu.emit.qyan.alg.model.abstracts.BaseVertex)
+	 */
+	public double get_edge_weight(BaseVertex source, BaseVertex sink) {
+		// return _vertex_pair_weight_index.containsKey(new Pair<Integer,
+		// Integer>(source.get_id(),
+		// sink.get_id()))?_vertex_pair_weight_index.get(new Pair<Integer,
+		// Integer>(source.get_id(), sink.get_id())) : DISCONNECTED;
+		return _vertex_pair_weight_index.containsKey(new Pair<Long, Long>(source.get_id(), sink.get_id())) ? _vertex_pair_weight_index.get(new Pair<Long, Long>(source.get_id(), sink.get_id())) : DISCONNECTED;
+	}
+
+	/**
+	 * Set the number of vertices in the graph
+	 * 
+	 * @param num
+	 */
+	public void set_vertex_num(int num) {
+		_vertex_num = num;
+	}
+
+	/**
+	 * Return the vertex list in the graph.
+	 */
+	public List<BaseVertex> get_vertex_list() {
+		return _vertex_list;
+	}
+
+	/**
+	 * Get the vertex with the input id.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	// public BaseVertex get_vertex(int id)
+	// {
+	// return _id_vertex_index.get(id);
+	// }
+	public BaseVertex get_vertex(long id) {
+		return _id_vertex_index.get(id);
+	}
+}

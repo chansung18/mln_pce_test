@@ -1,0 +1,916 @@
+Line Counter - Version 1.4 (build 18.1)
+Counts code and comment lines in C/C++/C#, Java and PHP source files.
+Copyright (c) 2003-2010, Noël Danjou. All rights reserved.
+
+Verbose mode enabled.
+Processing files in sub-directories.
+
+Source path: D:\0_etri_RouterListener\ospfd_20090429\eclipse_workspace\pcep_src\pcep\pcep.
+
+Browsing folder '\'...
+
+PCEPConnection.java (size: 27.2KB, actual: 23.1KB)
+-----------------------------------------------------
+  Number of lines of code:        449
+  Number of directive lines:        0
+  Number of empty lines:          104
+  Number of comment lines:        238
+  Number of empty comment lines:  147
+  -------------------------------------------
+  Total number of lines:          938
+-----------------------------------------------
+
+PCEPElement.java (size: 8.99KB, actual: 7.68KB)
+-----------------------------------------------------
+  Number of lines of code:        186
+  Number of directive lines:        0
+  Number of empty lines:           44
+  Number of comment lines:         68
+  Number of empty comment lines:   50
+  -------------------------------------------
+  Total number of lines:          348
+-----------------------------------------------
+
+PCEPSession.java (size: 22.6KB, actual: 18.8KB)
+-----------------------------------------------------
+  Number of lines of code:        396
+  Number of directive lines:        0
+  Number of empty lines:          132
+  Number of comment lines:        215
+  Number of empty comment lines:  211
+  -------------------------------------------
+  Total number of lines:          954
+-----------------------------------------------
+3 file(s) processed.
+
+Browsing folder '\element'...
+
+Server.java (size: 1.53KB, actual: 1.30KB)
+-----------------------------------------------------
+  Number of lines of code:        31
+  Number of directive lines:       0
+  Number of empty lines:          10
+  Number of comment lines:        17
+  Number of empty comment lines:  12
+  -------------------------------------------
+  Total number of lines:          70
+-----------------------------------------------
+1 file(s) processed.
+
+Browsing folder '\eventhandler'...
+
+ConnectionListener.java (size: 534
+ErrorListener.java (size: 1.46KB, actual: 1.26KB)
+-----------------------------------------------------
+  Number of lines of code:        19
+  Number of directive lines:       0
+  Number of empty lines:           9
+  Number of comment lines:        22
+  Number of empty comment lines:   9
+  -------------------------------------------
+  Total number of lines:          59
+-----------------------------------------------
+
+InputListener.java (size: 650
+InwardEventListener.java (size: 1.32KB, actual: 1.20KB)
+-----------------------------------------------------
+  Number of lines of code:         8
+  Number of directive lines:       0
+  Number of empty lines:           7
+  Number of comment lines:        15
+  Number of empty comment lines:   9
+  -------------------------------------------
+  Total number of lines:          39
+-----------------------------------------------
+
+NormalConnectionListener.java (size: 1008
+testInputListener.java (size: 1.66KB, actual: 1.44KB)
+-----------------------------------------------------
+  Number of lines of code:        36
+  Number of directive lines:       0
+  Number of empty lines:          11
+  Number of comment lines:        16
+  Number of empty comment lines:   0
+  -------------------------------------------
+  Total number of lines:          63
+-----------------------------------------------
+6 file(s) processed.
+
+Browsing folder '\manager'...
+
+CloseMessageHandler.java (size: 2.64KB, actual: 2.27KB)
+-----------------------------------------------------
+  Number of lines of code:        61
+  Number of directive lines:       0
+  Number of empty lines:          14
+  Number of comment lines:        10
+  Number of empty comment lines:  10
+  -------------------------------------------
+  Total number of lines:          95
+-----------------------------------------------
+
+KeepAliveMessageHandler.java (size: 1.14KB, actual: 1.00KB)
+-----------------------------------------------------
+  Number of lines of code:        24
+  Number of directive lines:       0
+  Number of empty lines:           9
+  Number of comment lines:         4
+  Number of empty comment lines:   7
+  -------------------------------------------
+  Total number of lines:          44
+-----------------------------------------------
+
+MessageManager.java (size: 2.78KB, actual: 2.36KB)
+-----------------------------------------------------
+  Number of lines of code:         49
+  Number of directive lines:        0
+  Number of empty lines:           19
+  Number of comment lines:         22
+  Number of empty comment lines:   20
+  -------------------------------------------
+  Total number of lines:          110
+-----------------------------------------------
+
+OpenMessageHandler.java (size: 2.85KB, actual: 2.48KB)
+-----------------------------------------------------
+  Number of lines of code:        64
+  Number of directive lines:       0
+  Number of empty lines:          15
+  Number of comment lines:         9
+  Number of empty comment lines:   7
+  -------------------------------------------
+  Total number of lines:          95
+-----------------------------------------------
+
+PacketChain.java (size: 4.72KB, actual: 4.25KB)
+-----------------------------------------------------
+  Number of lines of code:         84
+  Number of directive lines:        0
+  Number of empty lines:           16
+  Number of comment lines:         22
+  Number of empty comment lines:   23
+  -------------------------------------------
+  Total number of lines:          145
+-----------------------------------------------
+
+PacketContext.java (size: 2.12KB, actual: 1.80KB)
+-----------------------------------------------------
+  Number of lines of code:        30
+  Number of directive lines:       0
+  Number of empty lines:           8
+  Number of comment lines:        27
+  Number of empty comment lines:  27
+  -------------------------------------------
+  Total number of lines:          92
+-----------------------------------------------
+
+PCErrMessageHandler.java (size: 3.12KB, actual: 2.68KB)
+-----------------------------------------------------
+  Number of lines of code:         77
+  Number of directive lines:        0
+  Number of empty lines:           18
+  Number of comment lines:          9
+  Number of empty comment lines:    8
+  -------------------------------------------
+  Total number of lines:          112
+-----------------------------------------------
+
+PCNtfMessageHandler.java (size: 3.15KB, actual: 2.69KB)
+-----------------------------------------------------
+  Number of lines of code:         80
+  Number of directive lines:        0
+  Number of empty lines:           19
+  Number of comment lines:          8
+  Number of empty comment lines:    8
+  -------------------------------------------
+  Total number of lines:          115
+-----------------------------------------------
+
+PCRepMessageHandler.java (size: 6.21KB, actual: 5.17KB)
+-----------------------------------------------------
+  Number of lines of code:        159
+  Number of directive lines:        0
+  Number of empty lines:           25
+  Number of comment lines:         24
+  Number of empty comment lines:   20
+  -------------------------------------------
+  Total number of lines:          228
+-----------------------------------------------
+
+PCReqMessageHandler.java (size: 6.61KB, actual: 5.62KB)
+-----------------------------------------------------
+  Number of lines of code:        151
+  Number of directive lines:        0
+  Number of empty lines:           25
+  Number of comment lines:         26
+  Number of empty comment lines:   18
+  -------------------------------------------
+  Total number of lines:          220
+-----------------------------------------------
+10 file(s) processed.
+
+Browsing folder '\packet'...
+
+AttrCmpObj.java (size: 3.03KB, actual: 2.54KB)
+-----------------------------------------------------
+  Number of lines of code:         75
+  Number of directive lines:        0
+  Number of empty lines:           25
+  Number of comment lines:         28
+  Number of empty comment lines:   27
+  -------------------------------------------
+  Total number of lines:          155
+-----------------------------------------------
+
+BandwidthObject.java (size: 2.96KB, actual: 2.52KB)
+-----------------------------------------------------
+  Number of lines of code:         81
+  Number of directive lines:        0
+  Number of empty lines:           21
+  Number of comment lines:         16
+  Number of empty comment lines:   15
+  -------------------------------------------
+  Total number of lines:          133
+-----------------------------------------------
+
+CloseObject.java (size: 3.22KB, actual: 2.68KB)
+-----------------------------------------------------
+  Number of lines of code:         93
+  Number of directive lines:        0
+  Number of empty lines:           27
+  Number of comment lines:         24
+  Number of empty comment lines:   21
+  -------------------------------------------
+  Total number of lines:          165
+-----------------------------------------------
+
+CommonObjectHeader.java (size: 5.66KB, actual: 4.76KB)
+-----------------------------------------------------
+  Number of lines of code:         97
+  Number of directive lines:        0
+  Number of empty lines:           26
+  Number of comment lines:         67
+  Number of empty comment lines:   66
+  -------------------------------------------
+  Total number of lines:          256
+-----------------------------------------------
+
+ComputationUtils.java (size: 9.49KB, actual: 7.97KB)
+-----------------------------------------------------
+  Number of lines of code:        224
+  Number of directive lines:        0
+  Number of empty lines:           61
+  Number of comment lines:         83
+  Number of empty comment lines:   48
+  -------------------------------------------
+  Total number of lines:          416
+-----------------------------------------------
+
+EndPointsObject.java (size: 6.46KB, actual: 5.38KB)
+-----------------------------------------------------
+  Number of lines of code:        151
+  Number of directive lines:        0
+  Number of empty lines:           40
+  Number of comment lines:         61
+  Number of empty comment lines:   43
+  -------------------------------------------
+  Total number of lines:          295
+-----------------------------------------------
+
+EROASNumber.java (size: 1.34KB, actual: 1.13KB)
+-----------------------------------------------------
+  Number of lines of code:        47
+  Number of directive lines:       0
+  Number of empty lines:          16
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          70
+-----------------------------------------------
+
+ERObject.java (size: 3.29KB, actual: 2.73KB)
+-----------------------------------------------------
+  Number of lines of code:        113
+  Number of directive lines:        0
+  Number of empty lines:           35
+  Number of comment lines:          5
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          157
+-----------------------------------------------
+
+EROIPv4Prefix.java (size: 1.69KB, actual: 1.42KB)
+-----------------------------------------------------
+  Number of lines of code:        62
+  Number of directive lines:       0
+  Number of empty lines:          18
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          87
+-----------------------------------------------
+
+EROIPv6Prefix.java (size: 1.59KB, actual: 1.35KB)
+-----------------------------------------------------
+  Number of lines of code:        56
+  Number of directive lines:       0
+  Number of empty lines:          16
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          79
+-----------------------------------------------
+
+EROLabelOTL.java (size: 1.93KB, actual: 1.62KB)
+-----------------------------------------------------
+  Number of lines of code:         71
+  Number of directive lines:        0
+  Number of empty lines:           25
+  Number of comment lines:          3
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          103
+-----------------------------------------------
+
+EROLabelPTL.java (size: 3.11KB, actual: 2.60KB)
+-----------------------------------------------------
+  Number of lines of code:        117
+  Number of directive lines:        0
+  Number of empty lines:           35
+  Number of comment lines:          4
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          160
+-----------------------------------------------
+
+EROSLU.java (size: 1.87KB, actual: 1.58KB)
+-----------------------------------------------------
+  Number of lines of code:        66
+  Number of directive lines:       0
+  Number of empty lines:          23
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          96
+-----------------------------------------------
+
+EROSubObj.java (size: 1.30KB, actual: 1.08KB)
+-----------------------------------------------------
+  Number of lines of code:        53
+  Number of directive lines:       0
+  Number of empty lines:          20
+  Number of comment lines:         2
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          79
+-----------------------------------------------
+
+ErrorCmpObj.java (size: 2.54KB, actual: 2.06KB)
+-----------------------------------------------------
+  Number of lines of code:         81
+  Number of directive lines:        0
+  Number of empty lines:           22
+  Number of comment lines:         14
+  Number of empty comment lines:   17
+  -------------------------------------------
+  Total number of lines:          134
+-----------------------------------------------
+
+IRObject.java (size: 2.95KB, actual: 2.49KB)
+-----------------------------------------------------
+  Number of lines of code:         97
+  Number of directive lines:        0
+  Number of empty lines:           33
+  Number of comment lines:          5
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          139
+-----------------------------------------------
+
+IROSLU.java (size: 1.94KB, actual: 1.65KB)
+-----------------------------------------------------
+  Number of lines of code:        66
+  Number of directive lines:       0
+  Number of empty lines:          22
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          95
+-----------------------------------------------
+
+IROSubObj.java (size: 1.17KB, actual: 982
+LoadBalancingObject.java (size: 3.57KB, actual: 2.98KB)
+-----------------------------------------------------
+  Number of lines of code:        100
+  Number of directive lines:        0
+  Number of empty lines:           28
+  Number of comment lines:         25
+  Number of empty comment lines:   27
+  -------------------------------------------
+  Total number of lines:          180
+-----------------------------------------------
+
+LSPAObject.java (size: 3.36KB, actual: 2.85KB)
+-----------------------------------------------------
+  Number of lines of code:        114
+  Number of directive lines:        0
+  Number of empty lines:           34
+  Number of comment lines:          8
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          160
+-----------------------------------------------
+
+MetricObject.java (size: 5.43KB, actual: 4.51KB)
+-----------------------------------------------------
+  Number of lines of code:        147
+  Number of directive lines:        0
+  Number of empty lines:           38
+  Number of comment lines:         42
+  Number of empty comment lines:   46
+  -------------------------------------------
+  Total number of lines:          273
+-----------------------------------------------
+
+NoPathObject.java (size: 5.63KB, actual: 4.70KB)
+-----------------------------------------------------
+  Number of lines of code:        153
+  Number of directive lines:        0
+  Number of empty lines:           42
+  Number of comment lines:         40
+  Number of empty comment lines:   35
+  -------------------------------------------
+  Total number of lines:          270
+-----------------------------------------------
+
+NotificationObject.java (size: 4.84KB, actual: 4.08KB)
+-----------------------------------------------------
+  Number of lines of code:        125
+  Number of directive lines:        0
+  Number of empty lines:           33
+  Number of comment lines:         31
+  Number of empty comment lines:   29
+  -------------------------------------------
+  Total number of lines:          218
+-----------------------------------------------
+
+NotifyCmpObj.java (size: 2.15KB, actual: 1.77KB)
+-----------------------------------------------------
+  Number of lines of code:         69
+  Number of directive lines:        0
+  Number of empty lines:           17
+  Number of comment lines:          8
+  Number of empty comment lines:   11
+  -------------------------------------------
+  Total number of lines:          105
+-----------------------------------------------
+
+OpenObject.java (size: 3.22KB, actual: 2.69KB)
+-----------------------------------------------------
+  Number of lines of code:         91
+  Number of directive lines:        0
+  Number of empty lines:           28
+  Number of comment lines:         21
+  Number of empty comment lines:   23
+  -------------------------------------------
+  Total number of lines:          163
+-----------------------------------------------
+
+PathCmpObj.java (size: 3.35KB, actual: 2.76KB)
+-----------------------------------------------------
+  Number of lines of code:        104
+  Number of directive lines:        0
+  Number of empty lines:           28
+  Number of comment lines:         27
+  Number of empty comment lines:   19
+  -------------------------------------------
+  Total number of lines:          178
+-----------------------------------------------
+
+PCEPCommonHeader.java (size: 4.02KB, actual: 3.43KB)
+-----------------------------------------------------
+  Number of lines of code:         58
+  Number of directive lines:        0
+  Number of empty lines:           19
+  Number of comment lines:         49
+  Number of empty comment lines:   45
+  -------------------------------------------
+  Total number of lines:          171
+-----------------------------------------------
+
+PCEPErrorObject.java (size: 4.43KB, actual: 3.68KB)
+-----------------------------------------------------
+  Number of lines of code:        125
+  Number of directive lines:        0
+  Number of empty lines:           35
+  Number of comment lines:         29
+  Number of empty comment lines:   29
+  -------------------------------------------
+  Total number of lines:          218
+-----------------------------------------------
+
+PCEPMessage.java (size: 3.24KB, actual: 2.78KB)
+-----------------------------------------------------
+  Number of lines of code:         47
+  Number of directive lines:        0
+  Number of empty lines:           17
+  Number of comment lines:         34
+  Number of empty comment lines:   36
+  -------------------------------------------
+  Total number of lines:          134
+-----------------------------------------------
+
+PCEPObject.java (size: 4.84KB, actual: 4.15KB)
+-----------------------------------------------------
+  Number of lines of code:         84
+  Number of directive lines:        0
+  Number of empty lines:           22
+  Number of comment lines:         44
+  Number of empty comment lines:   45
+  -------------------------------------------
+  Total number of lines:          195
+-----------------------------------------------
+
+PCEPObjectAbstract.java (size: 2.91KB, actual: 2.51KB)
+-----------------------------------------------------
+  Number of lines of code:         33
+  Number of directive lines:        0
+  Number of empty lines:           16
+  Number of comment lines:         33
+  Number of empty comment lines:   36
+  -------------------------------------------
+  Total number of lines:          118
+-----------------------------------------------
+
+PCEPObjectComposite.java (size: 1.72KB, actual: 1.45KB)
+-----------------------------------------------------
+  Number of lines of code:        56
+  Number of directive lines:       0
+  Number of empty lines:          25
+  Number of comment lines:         6
+  Number of empty comment lines:   6
+  -------------------------------------------
+  Total number of lines:          93
+-----------------------------------------------
+
+PCEPObjectFactory.java (size: 2.50KB, actual: 2.14KB)
+-----------------------------------------------------
+  Number of lines of code:        66
+  Number of directive lines:       0
+  Number of empty lines:           8
+  Number of comment lines:        10
+  Number of empty comment lines:   7
+  -------------------------------------------
+  Total number of lines:          91
+-----------------------------------------------
+
+PCEPTLV.java (size: 1.58KB, actual: 1.28KB)
+-----------------------------------------------------
+  Number of lines of code:        49
+  Number of directive lines:       0
+  Number of empty lines:          17
+  Number of comment lines:        13
+  Number of empty comment lines:  15
+  -------------------------------------------
+  Total number of lines:          94
+-----------------------------------------------
+
+RequestCmpObj.java (size: 6.28KB, actual: 5.18KB)
+-----------------------------------------------------
+  Number of lines of code:        168
+  Number of directive lines:        0
+  Number of empty lines:           52
+  Number of comment lines:         58
+  Number of empty comment lines:   51
+  -------------------------------------------
+  Total number of lines:          329
+-----------------------------------------------
+
+ResponseCmpObj.java (size: 3.83KB, actual: 3.18KB)
+-----------------------------------------------------
+  Number of lines of code:        108
+  Number of directive lines:        0
+  Number of empty lines:           30
+  Number of comment lines:         33
+  Number of empty comment lines:   27
+  -------------------------------------------
+  Total number of lines:          198
+-----------------------------------------------
+
+RPObject.java (size: 7.03KB, actual: 5.79KB)
+-----------------------------------------------------
+  Number of lines of code:        187
+  Number of directive lines:        0
+  Number of empty lines:           42
+  Number of comment lines:         58
+  Number of empty comment lines:   51
+  -------------------------------------------
+  Total number of lines:          338
+-----------------------------------------------
+
+RROASNumber.java (size: 1.32KB, actual: 1.11KB)
+-----------------------------------------------------
+  Number of lines of code:        47
+  Number of directive lines:       0
+  Number of empty lines:          16
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          70
+-----------------------------------------------
+
+RRObject.java (size: 3.26KB, actual: 2.73KB)
+-----------------------------------------------------
+  Number of lines of code:        112
+  Number of directive lines:        0
+  Number of empty lines:           25
+  Number of comment lines:          5
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          146
+-----------------------------------------------
+
+RROCmpObj.java (size: 1.58KB, actual: 1.32KB)
+-----------------------------------------------------
+  Number of lines of code:        41
+  Number of directive lines:       0
+  Number of empty lines:          13
+  Number of comment lines:        16
+  Number of empty comment lines:  15
+  -------------------------------------------
+  Total number of lines:          85
+-----------------------------------------------
+
+RROIPv4Prefix.java (size: 1.69KB, actual: 1.42KB)
+-----------------------------------------------------
+  Number of lines of code:        62
+  Number of directive lines:       0
+  Number of empty lines:          18
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          87
+-----------------------------------------------
+
+RROIPv6Prefix.java (size: 1.59KB, actual: 1.35KB)
+-----------------------------------------------------
+  Number of lines of code:        56
+  Number of directive lines:       0
+  Number of empty lines:          16
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          79
+-----------------------------------------------
+
+RROLabelOTL.java (size: 2.39KB, actual: 2.00KB)
+-----------------------------------------------------
+  Number of lines of code:         71
+  Number of directive lines:        0
+  Number of empty lines:           24
+  Number of comment lines:         12
+  Number of empty comment lines:   12
+  -------------------------------------------
+  Total number of lines:          119
+-----------------------------------------------
+
+RROLabelPTL.java (size: 2.65KB, actual: 2.21KB)
+-----------------------------------------------------
+  Number of lines of code:        102
+  Number of directive lines:        0
+  Number of empty lines:           30
+  Number of comment lines:          3
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          139
+-----------------------------------------------
+
+RROSLU.java (size: 1.87KB, actual: 1.58KB)
+-----------------------------------------------------
+  Number of lines of code:        66
+  Number of directive lines:       0
+  Number of empty lines:          23
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          96
+-----------------------------------------------
+
+RROSubObj.java (size: 1.28KB, actual: 1.06KB)
+-----------------------------------------------------
+  Number of lines of code:        51
+  Number of directive lines:       0
+  Number of empty lines:          19
+  Number of comment lines:         2
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          76
+-----------------------------------------------
+
+SVECObject.java (size: 5.49KB, actual: 4.58KB)
+-----------------------------------------------------
+  Number of lines of code:        143
+  Number of directive lines:        0
+  Number of empty lines:           42
+  Number of comment lines:         44
+  Number of empty comment lines:   43
+  -------------------------------------------
+  Total number of lines:          272
+-----------------------------------------------
+
+XROASNumber.java (size: 1.34KB, actual: 1.13KB)
+-----------------------------------------------------
+  Number of lines of code:        47
+  Number of directive lines:       0
+  Number of empty lines:          16
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          70
+-----------------------------------------------
+
+XRObject.java (size: 3.55KB, actual: 2.97KB)
+-----------------------------------------------------
+  Number of lines of code:        117
+  Number of directive lines:        0
+  Number of empty lines:           32
+  Number of comment lines:          9
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          162
+-----------------------------------------------
+
+XROIPv4Prefix.java (size: 1.69KB, actual: 1.42KB)
+-----------------------------------------------------
+  Number of lines of code:        62
+  Number of directive lines:       0
+  Number of empty lines:          18
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          87
+-----------------------------------------------
+
+XROIPv6Prefix.java (size: 1.59KB, actual: 1.35KB)
+-----------------------------------------------------
+  Number of lines of code:        56
+  Number of directive lines:       0
+  Number of empty lines:          16
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          79
+-----------------------------------------------
+
+XROSLU.java (size: 2.05KB, actual: 1.73KB)
+-----------------------------------------------------
+  Number of lines of code:         74
+  Number of directive lines:        0
+  Number of empty lines:           23
+  Number of comment lines:          3
+  Number of empty comment lines:    4
+  -------------------------------------------
+  Total number of lines:          104
+-----------------------------------------------
+
+XROSRLG.java (size: 1.63KB, actual: 1.37KB)
+-----------------------------------------------------
+  Number of lines of code:        58
+  Number of directive lines:       0
+  Number of empty lines:          20
+  Number of comment lines:         3
+  Number of empty comment lines:   4
+  -------------------------------------------
+  Total number of lines:          85
+-----------------------------------------------
+
+XROSubObj.java (size: 1.17KB, actual: 98254 file(s) processed.
+
+Browsing folder '\testbed'...
+
+PCCTestV2.java (size: 7.52KB, actual: 6.29KB)
+-----------------------------------------------------
+  Number of lines of code:        173
+  Number of directive lines:        0
+  Number of empty lines:           37
+  Number of comment lines:         25
+  Number of empty comment lines:    2
+  -------------------------------------------
+  Total number of lines:          237
+-----------------------------------------------
+
+TestComputationUtil.java (size: 331
+TestErrCase1.java (size: 13.0KB, actual: 10.8KB)
+-----------------------------------------------------
+  Number of lines of code:        362
+  Number of directive lines:        0
+  Number of empty lines:           97
+  Number of comment lines:         25
+  Number of empty comment lines:    3
+  -------------------------------------------
+  Total number of lines:          487
+-----------------------------------------------
+
+testInputListener.java (size: 1.70KB, actual: 1.47KB)
+-----------------------------------------------------
+  Number of lines of code:        37
+  Number of directive lines:       0
+  Number of empty lines:          11
+  Number of comment lines:        16
+  Number of empty comment lines:   0
+  -------------------------------------------
+  Total number of lines:          64
+-----------------------------------------------
+
+TestMessageHandler.java (size: 9.30KB, actual: 7.63KB)
+-----------------------------------------------------
+  Number of lines of code:        236
+  Number of directive lines:        0
+  Number of empty lines:           65
+  Number of comment lines:         27
+  Number of empty comment lines:    6
+  -------------------------------------------
+  Total number of lines:          334
+-----------------------------------------------
+
+TestMessageHandlerPeer.java (size: 17.6KB, actual: 13.6KB)
+-----------------------------------------------------
+  Number of lines of code:        323
+  Number of directive lines:        0
+  Number of empty lines:          115
+  Number of comment lines:         78
+  Number of empty comment lines:   16
+  -------------------------------------------
+  Total number of lines:          532
+-----------------------------------------------
+
+TestMultiSes1.java (size: 11.6KB, actual: 9.62KB)
+-----------------------------------------------------
+  Number of lines of code:        321
+  Number of directive lines:        0
+  Number of empty lines:           85
+  Number of comment lines:         24
+  Number of empty comment lines:    3
+  -------------------------------------------
+  Total number of lines:          433
+-----------------------------------------------
+
+TestPCEP.java (size: 3.05KB, actual: 2.73KB)
+-----------------------------------------------------
+  Number of lines of code:        49
+  Number of directive lines:       0
+  Number of empty lines:          22
+  Number of comment lines:        25
+  Number of empty comment lines:   0
+  -------------------------------------------
+  Total number of lines:          96
+-----------------------------------------------
+
+TestPCEPCase1.java (size: 8.79KB, actual: 7.23KB)
+-----------------------------------------------------
+  Number of lines of code:        233
+  Number of directive lines:        0
+  Number of empty lines:           63
+  Number of comment lines:         22
+  Number of empty comment lines:    5
+  -------------------------------------------
+  Total number of lines:          323
+-----------------------------------------------
+
+TestPCEPCase2.java (size: 11.6KB, actual: 9.67KB)
+-----------------------------------------------------
+  Number of lines of code:        321
+  Number of directive lines:        0
+  Number of empty lines:           85
+  Number of comment lines:         25
+  Number of empty comment lines:    3
+  -------------------------------------------
+  Total number of lines:          434
+-----------------------------------------------
+
+TestPCEPCase3.java (size: 7.97KB, actual: 6.68KB)
+-----------------------------------------------------
+  Number of lines of code:        210
+  Number of directive lines:        0
+  Number of empty lines:           70
+  Number of comment lines:         25
+  Number of empty comment lines:    2
+  -------------------------------------------
+  Total number of lines:          307
+-----------------------------------------------
+
+TestPCEPElement.java (size: 1.09KB, actual: 98612 file(s) processed.
+
+------------------------------------------------------------------
+
+Summary (size: 361KB, actual: 303KB)
+-----------------------------------------------------
+  Number of lines of code:         8954
+  Number of directive lines:          0
+  Number of empty lines:           2567
+  Number of comment lines:         2078
+  Number of empty comment lines:   1588
+  -------------------------------------------
+  Total number of lines:          15187
+-----------------------------------------------
+86 file(s) processed in 0.16 second(s).
