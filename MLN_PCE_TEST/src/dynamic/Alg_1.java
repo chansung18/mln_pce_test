@@ -28,7 +28,7 @@ import pcep.packet.NoPathObject;
 import pcep.packet.RPObject;
 import pcep.packet.XRObject;
 
-// 반드시 import 해줘야 함.
+// ��������� import ��������� ���.
 
 public class Alg_1 extends AbstractCommand  
 {
@@ -41,7 +41,7 @@ public class Alg_1 extends AbstractCommand
 	public Alg_1()
 	{
 //		SystemManager.otllogger.out.setAdditivity(true);
-//		SystemManager.otllogger.out.debug("[Algorithm Class: " + this.getClass() + "] 이 동적으로 로딩되었음..");
+//		SystemManager.otllogger.out.debug("[Algorithm Class: " + this.getClass() + "] ��� ������������ ���������������..");
 //		SystemManager.otllogger.out.setAdditivity(false);
 	}
 	
@@ -55,21 +55,23 @@ public class Alg_1 extends AbstractCommand
 //	public void computePath(int sid, RPObject rp, EndPointsObject endpoint, BandwidthObject bandwidth, Vector<MetricObject> metricList, IRObject iro, XRObject xro, Vector rset_vec)
 	public void computePath(int sid, RPObject rp, EndPointsObject endpoint, BandwidthObject bandwidth, Vector<MetricObject> metricList, IRObject iro, XRObject xro)
 	{
-//		SystemManager.otllogger.out.debug("다음 조합의 경로계산이 수행됨 ==> " + "RPObject rp, EndPointsObject endpoint");
+//		SystemManager.otllogger.out.debug("������ ��������� ��������������� ��������� ==> " + "RPObject rp, EndPointsObject endpoint");
 	
-		// 함수화 시킨 부분 start
+		// ��������� ������ ������ start
 		
 //		PCM.etriComputation(sid, rp, endpoint, bandwidth, metricList, iro, xro, rset_vec);
-		PCM.etriComputation(sid, rp, endpoint, bandwidth, metricList, iro, xro);
+//		PCM.etriComputation(sid, rp, endpoint, bandwidth, metricList, iro, xro);
 	
-		// 함수화 시킨 부분 end
+		PCM.etriComputation(sid, rp, endpoint, bandwidth, metricList, iro, xro);
+		
+		// ��������� ������ ������ end
 	}
 	
 //	public PathCmpObj computePathforBRPC(EndPointsObject endpoint, BandwidthObject bandwidth, Vector<MetricObject> metricList, IRObject iro, XRObject xro)
 //	{
-////		SystemManager.otllogger.out.debug("다음 조합의 경로계산이 수행됨(BRPC) ==> " + "EndPointsObject endpoint");
-//		// 함수화 시킨 부분 start
+////		SystemManager.otllogger.out.debug("������ ��������� ��������������� ���������(BRPC) ==> " + "EndPointsObject endpoint");
+//		// ��������� ������ ������ start
 ////		return PCM.etriComputationforBRPC(endpoint, bandwidth, metricList, iro, xro);
-//		// 함수화 시킨 부분 end
+//		// ��������� ������ ������ end
 //	}
 }
