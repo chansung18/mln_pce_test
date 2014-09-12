@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
+import model.WatchUtil;
+import pcep.manager.PacketChain;
 import pcep.packet.BandwidthObject;
 import pcep.packet.EndPointsObject;
 import pcep.packet.IRObject;
@@ -148,6 +150,7 @@ if(rs.next()) {
 				tmpTELink.setRemoteNodeId(rs.getString("remote_node_id"));
 				tmpTELink.setRemoteInterfaceId(rs.getString("remote_interface_id"));
 				tmpTELink.setRemoteIfName(rs.getString("remote_interface_name"));
+				tmpTELink.setMetricLevel(1);
 				
 				TELinkList.add(tmpTELink);
 			}
@@ -164,11 +167,17 @@ if(rs.next()) {
 			
 		//Make Graph
 		PathComputationManager pcm = new PathComputationManager();
+		pcm.setTELinkList(TELinkList);
 		
 		AbstractCommand command = new Alg_1();
 		command.setPCM(pcm);
 		
-		command.computePath(0, null, null, null, null, null, null);
+		int srcAddr = (int)WatchUtil.getAddrLong("10.254.254.101");
+		int destAddr = (int)WatchUtil.getAddrLong("10.254.254.104");
+		
+		EndPointsObject endpoint = new EndPointsObject(PacketChain.PCREQ_PT, srcAddr, destAddr);
+		
+		command.computePath(0, null, endpoint, null, null, null, null);
 		
 		
 		//Computation..

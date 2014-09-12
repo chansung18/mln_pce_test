@@ -6,7 +6,7 @@ import pcep.PCEPSession.SessionAccessor;
 import pcep.manager.PacketChain;
 
 /**
- * EndPoints 정보객체
+ * EndPoints ������������
  * 
  * @author Ancom
  */
@@ -39,7 +39,7 @@ public class EndPointsObject extends PCEPObject {
 	 */
 
 	private byte[] desIPv6 = null;
-
+	
 	public EndPointsObject(byte messageType, byte[] data) {
 		this.messageType = messageType;
 		byte[] headerdata = new byte[4];

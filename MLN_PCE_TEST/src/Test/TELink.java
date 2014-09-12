@@ -20,7 +20,7 @@ public class TELink {
 	public CommonVariable.EncodingType encodingType;
 	
 	public CommonVariable.ComputationLevel computationLevel;
-	public CommonVariable.MetricLevel	   metricLevel;
+	public int	   metricLevel;
 	
 	public double maxBanswidth;
 	public double availableBandwidth;
@@ -103,10 +103,10 @@ public class TELink {
 	public void setComputationLevel(CommonVariable.ComputationLevel computationLevel) {
 		this.computationLevel = computationLevel;
 	}
-	public CommonVariable.MetricLevel getMetricLevel() {
+	public int getMetricLevel() {
 		return metricLevel;
 	}
-	public void setMetricLevel(CommonVariable.MetricLevel metricLevel) {
+	public void setMetricLevel(int metricLevel) {
 		this.metricLevel = metricLevel;
 	}
 	public double getMaxBanswidth() {

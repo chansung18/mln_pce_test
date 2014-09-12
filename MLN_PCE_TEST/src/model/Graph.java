@@ -27,7 +27,7 @@ import model.abstracts.BaseVertex;
 
 public class Graph implements BaseGraph {
 	public final static boolean is_RL = false;
-	public final static boolean is_ops = true;
+	public final static boolean is_ops = false;	// it was true - changed by chansung, park
 	
 	public final static double DISCONNECTED = Double.MAX_VALUE;
 
@@ -35,18 +35,18 @@ public class Graph implements BaseGraph {
 	// protected Map<Integer, Set<BaseVertex>> _fanout_vertices_index = new
 	// HashMap<Integer, Set<BaseVertex>>();
 //	protected Map<Long, Set<BaseVertex>> _fanout_vertices_index = new HashMap<Long, Set<BaseVertex>>();
-	protected Map<Long, Vector<BaseVertex>> _fanout_vertices_index = new HashMap<Long, Vector<BaseVertex>>();
+	public Map<Long, Vector<BaseVertex>> _fanout_vertices_index = new HashMap<Long, Vector<BaseVertex>>();
 
 	// index for fan-ins of one vertex
 	// protected Map<Integer, Set<BaseVertex>> _fanin_vertices_index = new
 	// HashMap<Integer, Set<BaseVertex>>();
 //	protected Map<Long, Set<BaseVertex>> _fanin_vertices_index = new HashMap<Long, Set<BaseVertex>>();
-	protected Map<Long, Vector<BaseVertex>> _fanin_vertices_index = new HashMap<Long, Vector<BaseVertex>>();
+	public Map<Long, Vector<BaseVertex>> _fanin_vertices_index = new HashMap<Long, Vector<BaseVertex>>();
 
 	// index for edge weights in the graph
 	// protected Map<Pair<Integer, Integer>, Double> _vertex_pair_weight_index =
 	// new HashMap<Pair<Integer,Integer>, Double>();
-	protected Map<Pair<Long, Long>, Double> _vertex_pair_weight_index = new HashMap<Pair<Long, Long>, Double>();
+	public Map<Pair<Long, Long>, Double> _vertex_pair_weight_index = new HashMap<Pair<Long, Long>, Double>();
 
 	// Pair 내부에 인자로 pair 두 개를 가지는 edge map을 만든다.
 	public Map<Pair, Double> _vertex_pair_weight_if_index = new HashMap<Pair, Double>();
@@ -154,6 +154,9 @@ public class Graph implements BaseGraph {
 				st.nextToken();
 				tmpRemote = st.nextToken(); // 세번째 컬럼
 
+				System.out.println("    |--Local : " + tmpLocal);
+				System.out.println("    |--Remote : " + tmpRemote);
+				
 				if((!tmpLocal.equals("0.0.0.0") && !tmpRemote.equals("0.0.0.0")) || (!tmpLocal.equals("0") && !tmpRemote.equals("0")))
 				{
 				if (vecNeList.size() == 0 && !tmpLocal.equals(tmpRemote)) 
@@ -344,6 +347,8 @@ public class Graph implements BaseGraph {
 				st.nextToken();
 				st.nextToken();
 				line = line + st.nextToken();
+				
+				System.out.println("      |--line : " + line);
 				}
 
 				
